@@ -20,4 +20,4 @@
 ---
 include:
   - board: nice_nano@2.0.0
-    shield: romac_plus
+    shield: macropad

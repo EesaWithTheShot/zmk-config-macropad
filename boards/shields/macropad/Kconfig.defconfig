@@ -1,0 +1,7 @@
+if SHIELD_MACROPAD
+
+config ZMK_KEYBOARD_NAME
+    # Max 15 chars
+    default "macropad"
+
+endif

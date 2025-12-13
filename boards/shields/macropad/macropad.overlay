@@ -70,7 +70,6 @@
     encoder0: encoder_0 {
         compatible = "alps,ec11";
 
-        /* TODO: set to the pins you wired for encoder A/B */
         a-gpios = <&gpio1 6 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
         b-gpios = <&gpio1 4 (GPIO_ACTIVE_HIGH | GPIO_PULL_UP)>;
 

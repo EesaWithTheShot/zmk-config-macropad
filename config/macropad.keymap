@@ -16,7 +16,7 @@
         default_layer {
             bindings = <
                 // Row 0  (encoder push is last one here)
-                &kp ESC   &out OUT_USB    &out OUT_BLE   &out OUT_TOG
+                &kp ESC   &kp N1    &kp N2   &kp N3
 
                 // Row 1
                 &kp N4     &kp SLASH      &kp ASTERISK      &kp BACKSPACE

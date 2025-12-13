@@ -21,3 +21,4 @@
 include:
   - board: nice_nano@2.0.0
     shield: macropad
+    snippet: zmk-usb-logging

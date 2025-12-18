@@ -16,10 +16,10 @@
         default_layer {
             bindings = <
                 // Row 0  (encoder push is last one here)
-                &kp ESC   &kp N1    &kp N2   &kp N3
+                &kp F20   &kp F21    &kp F22   &kp N3
 
                 // Row 1
-                &kp N4     &kp SLASH      &kp ASTERISK      &kp BACKSPACE
+                &kp ESC     &kp SLASH      &kp ASTERISK      &kp BACKSPACE
 
                 // Row 2
                 &kp N7     &kp N8      &kp N9      &kp MINUS

@@ -3,6 +3,7 @@
  */
 
 #include <dt-bindings/zmk/matrix_transform.h>
+#include <zephyr/dt-bindings/mipi_dbi/mipi_dbi.h>
 
  / {
     chosen {
@@ -86,13 +87,7 @@
         triggers-per-rotation = <24>;
     };
 };
-/* OLED screen */
-/ {
-    chosen {
-        /* Tell Zephyr/ZMK that this is the primary display */
-        zephyr,display = &oled;
-    };
-};
+
 
 /* Override the default pinctrl that uses MISO where Row 1 pin is */
 &pinctrl {
@@ -116,42 +111,51 @@
     status = "disabled";
 };
 
+/* OLED screen */
+/ {
+    /* Tell Zephyr/ZMK this is the primary display */
+    chosen {
+        zephyr,display = &oled;
+    };
 
-/* Enable an SPI instance */
+    /* MIPI DBI bus wrapper that uses spi1 */
+    mipi_dbi {
+        compatible = "zephyr,mipi-dbi-spi";
+        spi-dev = <&spi1>;
+        dc-gpios    = <&gpio0 8 GPIO_ACTIVE_HIGH>;
+        reset-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
+        write-only;                 /* we only ever write, no reads */
+        #address-cells = <1>;
+        #size-cells = <0>;
+
+        oled: ssd1322@0 {
+            compatible = "solomon,ssd1322";
+            reg = <0>;
+
+            /* 4-wire SPI mode */
+            mipi-mode          = "MIPI_DBI_MODE_SPI_4WIRE";
+            mipi-max-frequency = <8000000>;  /* 8 MHz is a safe starting point */
+
+            /* Your 256×64 Newhaven panel */
+            width  = <256>;
+            height = <64>;
+
+            /* Required SSD1322 tuning props – values from the docs */
+            column-offset     = <0>;
+            mux-ratio         = <63>;     /* height - 1 */
+            oscillator-freq   = <0x91>;
+            precharge-voltage = <0x1F>;
+            vcomh-voltage     = <0x7>;
+            phase-length      = <0xE2>;
+
+            /* Newhaven-specific option if pixels look squashed */
+            segments-per-pixel = <1>;     /* try 2 if needed */
+        };
+    };
+};
+
+/* Enable SPI1; chip select is still on P0.17 */
 &spi1 {
     status = "okay";
-
-    /* Chip select: a GPIO that goes to display CS */
     cs-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
-
-    oled: ssd1322@0 {
-        compatible = "solomon,ssd1322";
-        reg = <0>;              /* Chip-select index */
-
-        /* 4-wire SPI DBI mode */
-        mipi-mode = "MIPI_DBI_MODE_SPI_4WIRE";
-
-        /* DC (data/command) line */
-        dc-gpios    = <&gpio0 8 GPIO_ACTIVE_HIGH>;
-
-        /* Reset line */
-        reset-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
-
-        /* Display geometry: 256×64 panel */
-        width  = <256>;
-        height = <64>;
-
-        /* SSD1322-specific tuning values (good starting point) */
-        column-offset     = <0>;       /* you may need to tweak this */
-        mux-ratio         = <63>;      /* height - 1 */
-        oscillator-freq   = <0x91>;    /* recommended starting value */
-        precharge-voltage = <0x1F>;    /* high-ish to start */
-        vcomh-voltage     = <0x7>;     /* high-ish to start */
-        phase-length      = <0xE2>;    /* recommended for SSD1322 */
-
-        /* Newhaven-style SSD1322 panels sometimes map multiple
-         * driver segments per pixel. For many 256x64 panels this
-         * is still 1, but if text looks squashed, try 2. */
-        segments-per-pixel = <1>;
-    };
 };

@@ -111,13 +111,15 @@
         };
     };
 };
+/* Disable i2c0 since we're stealing 0.17 and 0.20 from it */
+&i2c0 {
+    status = "disabled";
+};
+
 
 /* Enable an SPI instance */
 &spi1 {
     status = "okay";
-
-    /* Tell the driver we don't use MISO */
-    miso-pin = <0xFF>;
 
     /* Chip select: a GPIO that goes to display CS */
     cs-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;

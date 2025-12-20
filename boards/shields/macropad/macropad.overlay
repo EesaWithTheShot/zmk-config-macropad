@@ -86,3 +86,70 @@
         triggers-per-rotation = <24>;
     };
 };
+/* OLED screen */
+/ {
+    chosen {
+        /* Tell Zephyr/ZMK that this is the primary display */
+        zephyr,display = &oled;
+    };
+};
+
+/* Override the default pinctrl that uses MISO where Row 1 pin is */
+&pinctrl {
+    spi1_default: spi1_default {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 10)>;
+        };
+    };
+
+    spi1_sleep: spi1_sleep {
+        group1 {
+            psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+                    <NRF_PSEL(SPIM_MOSI, 0, 10)>;
+            low-power-enable;
+        };
+    };
+};
+
+/* Enable an SPI instance */
+&spi1 {
+    status = "okay";
+
+    /* Tell the driver we don't use MISO */
+    miso-pin = <0xFF>;
+
+    /* Chip select: a GPIO that goes to display CS */
+    cs-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
+
+    oled: ssd1322@0 {
+        compatible = "solomon,ssd1322";
+        reg = <0>;              /* Chip-select index */
+
+        /* 4-wire SPI DBI mode */
+        mipi-mode = "MIPI_DBI_MODE_SPI_4WIRE";
+
+        /* DC (data/command) line */
+        dc-gpios    = <&gpio0 8 GPIO_ACTIVE_HIGH>;
+
+        /* Reset line */
+        reset-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
+
+        /* Display geometry: 256×64 panel */
+        width  = <256>;
+        height = <64>;
+
+        /* SSD1322-specific tuning values (good starting point) */
+        column-offset     = <0>;       /* you may need to tweak this */
+        mux-ratio         = <63>;      /* height - 1 */
+        oscillator-freq   = <0x91>;    /* recommended starting value */
+        precharge-voltage = <0x1F>;    /* high-ish to start */
+        vcomh-voltage     = <0x7>;     /* high-ish to start */
+        phase-length      = <0xE2>;    /* recommended for SSD1322 */
+
+        /* Newhaven-style SSD1322 panels sometimes map multiple
+         * driver segments per pixel. For many 256x64 panels this
+         * is still 1, but if text looks squashed, try 2. */
+        segments-per-pixel = <1>;
+    };
+};

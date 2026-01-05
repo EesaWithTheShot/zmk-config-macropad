@@ -72,15 +72,16 @@
         triggers-per-rotation = <24>;
     };
 
-    /* --- MIPI-DBI bus + SSD1322 OLED (when you’re ready to use it) --- */
+    /* MIPI-DBI bus for the SSD1322 on spi1 */
     mipi_dbi0: mipi_dbi0 {
         compatible = "zephyr,mipi-dbi-spi";
-        status = "okay";
-
-        spi-dev = <&spi1>;
+        /* your pins: DC = P0.08, RESET = P0.20 */
         dc-gpios    = <&gpio0 8 GPIO_ACTIVE_HIGH>;
         reset-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
+        /* no MISO line → write-only */
         write-only;
+        /* link it to spi1 */
+        spi-dev = <&spi1>;
 
         #address-cells = <1>;
         #size-cells = <0>;
@@ -89,20 +90,20 @@
             compatible = "solomon,ssd1322";
             reg = <0>;
 
+            /* SPI side */
+            mipi-max-frequency = <8000000>;   /* 8 MHz is a safe starting point */
+            mipi-mode = "MIPI_DBI_MODE_SPI_4WIRE";
+
             /* Panel geometry */
             width  = <256>;
             height = <64>;
 
-            /* Display layout */
-            column-offset = <0>;
-            mux-ratio     = <63>;   /* height - 1 */
+            /* SSD1322-specific */
+            column-offset = <0>;       /* tune later if image is shifted */
+            mux-ratio     = <63>;      /* 64-line panel; binding accepts 16–128 */
 
-            /* Newhaven: 1 or 2 depending on wiring; start with 1 */
+            /* Newhaven note: can be 1 or 2 depending on how they wired pixels */
             segments-per-pixel = <1>;
-
-            /* MIPI DBI config */
-            mipi-mode          = "MIPI_DBI_MODE_SPI_4WIRE";
-            mipi-max-frequency = <8000000>;
         };
     };
 };

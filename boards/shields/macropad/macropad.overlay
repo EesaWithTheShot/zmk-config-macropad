@@ -102,7 +102,7 @@
 
             /* SSD1322-specific */
             column-offset = <0>;       /* tune later if image is shifted */
-            mux-ratio     = <64>;      /* 64-line panel */
+            mux-ratio     = <63>;      /* 64-line panel */
             /* oscillator-freq = <0x91>; */
             /* phase-length = <0xE2>; */
             /* precharge-voltage = <0x1F>; */

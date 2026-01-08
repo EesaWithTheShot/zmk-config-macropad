@@ -101,7 +101,7 @@
             height = <64>;
 
             /* SSD1322-specific */
-            column-offset = <0>;       /* tune later if image is shifted */
+            column-offset = <28>;       /* tune later if image is shifted */
             mux-ratio     = <63>;      /* 64-line panel */
             /* oscillator-freq = <0x91>; */
             /* phase-length = <0xE2>; */

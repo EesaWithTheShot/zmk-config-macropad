@@ -75,7 +75,8 @@
     /* MIPI-DBI bus for the SSD1322 on spi1 */
     mipi_dbi0: mipi_dbi0 {
         compatible = "zephyr,mipi-dbi-spi";
-        /* your pins: DC = P0.08, RESET = P0.20 */
+        status = "okay";
+        /* pins: DC = P0.08, RESET = P0.20 */
         dc-gpios    = <&gpio0 8 GPIO_ACTIVE_HIGH>;
         reset-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
         /* no MISO line → write-only */
@@ -86,6 +87,7 @@
         #address-cells = <1>;
         #size-cells = <0>;
 
+        /* SSD1322 display setup */
         oled: ssd1322@0 {
             compatible = "solomon,ssd1322";
             reg = <0>;
@@ -95,15 +97,17 @@
             mipi-mode = "MIPI_DBI_MODE_SPI_4WIRE";
 
             /* Panel geometry */
-            width  = <256>;
+            width  = <128>;
             height = <64>;
 
             /* SSD1322-specific */
             column-offset = <0>;       /* tune later if image is shifted */
-            mux-ratio     = <63>;      /* 64-line panel; binding accepts 16–128 */
-
-            /* Newhaven note: can be 1 or 2 depending on how they wired pixels */
-            segments-per-pixel = <1>;
+            mux-ratio     = <63>;      /* 64-line panel; height-1; binding accepts 16–128 */
+            oscillator-freq = <0x91>;
+            phase-length = <0xE2>;
+            precharge-voltage = <0x1F>;
+            vcomh-voltage    = <0x07>;
+            segments-per-pixel = <2>;
         };
     };
 };

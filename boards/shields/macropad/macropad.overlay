@@ -94,7 +94,7 @@
 
             /* SPI side */
             mipi-max-frequency = <1000000>;   /* 8 MHz is a safe starting point */
-            mipi-mode = <MIPI_DBI_MODE_SPI_4WIRE>;
+            mipi-mode = "MIPI_DBI_MODE_SPI_4WIRE";
 
             /* Panel geometry */
             width  = <256>;

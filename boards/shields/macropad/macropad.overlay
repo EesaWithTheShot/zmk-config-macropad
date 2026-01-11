@@ -82,7 +82,7 @@
         /* no MISO line → write-only */
         write-only;
         /* link it to spi1 */
-        spi-dev = <&spi1>;
+        spi-dev = <&ssd1322_spi>;
 
         #address-cells = <1>;
         #size-cells = <0>;
@@ -138,6 +138,13 @@
     pinctrl-0 = <&spi1_default>;
     pinctrl-1 = <&spi1_sleep>;
     pinctrl-names = "default", "sleep";
+
+    /* THIS is what mipi_dbi0.spi-dev must reference */
+    ssd1322_spi: spi-device@0 {
+        compatible = "zephyr,spi-device";
+        reg = <0>;
+        spi-max-frequency = <1000000>;
+    };
 };
 
 /* Disable i2c0 since we're stealing 0.17 and 0.20 from it */

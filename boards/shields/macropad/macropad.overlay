@@ -114,14 +114,14 @@
 
 /* Override the default pinctrl that uses MISO where Row 1 pin is */
 &pinctrl {
-    spi1_default: spi1_default {
+    spi0_default: spi0_default {
         group1 {
             psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
                     <NRF_PSEL(SPIM_MOSI, 0, 10)>;
         };
     };
 
-    spi1_sleep: spi1_sleep {
+    spi0_sleep: spi0_sleep {
         group1 {
             psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
                     <NRF_PSEL(SPIM_MOSI, 0, 10)>;
@@ -130,13 +130,13 @@
     };
 };
 
-/* Enable SPI1 and hook CS on P0.17 */
-&spi1 {
+/* Enable SPI0 and hook CS on P0.17 */
+&spi0 {
     status = "okay";
     cs-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
 
-    pinctrl-0 = <&spi1_default>;
-    pinctrl-1 = <&spi1_sleep>;
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
 
     /* THIS is what mipi_dbi0.spi-dev must reference */

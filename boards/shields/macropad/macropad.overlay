@@ -93,7 +93,7 @@
             reg = <0>;
 
             /* SPI side */
-            mipi-max-frequency = <1000000>;   /* 8 MHz is a safe starting point */
+            mipi-max-frequency = <8000000>;   /* 8 MHz is a safe starting point */
             mipi-mode = "MIPI_DBI_MODE_SPI_4WIRE";
 
             /* Panel geometry */
@@ -143,7 +143,7 @@
     ssd1322_spi: spi-device@0 {
         compatible = "zephyr,spi-device";
         reg = <0>;
-        spi-max-frequency = <1000000>;
+        spi-max-frequency = <8000000>;
     };
 };
 

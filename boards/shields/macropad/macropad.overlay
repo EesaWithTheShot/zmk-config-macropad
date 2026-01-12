@@ -72,6 +72,18 @@
         triggers-per-rotation = <24>;
     };
 
+    
+};
+
+/* Enable SPI0 and hook CS on P0.17 */
+&spi0 {
+    status = "okay";
+    cs-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
+
+    pinctrl-0 = <&spi0_default>;
+    pinctrl-1 = <&spi0_sleep>;
+    pinctrl-names = "default", "sleep";
+
     /* MIPI-DBI bus for the SSD1322 on spi1 */
     mipi_dbi0: mipi_dbi0 {
         compatible = "zephyr,mipi-dbi-spi";
@@ -94,7 +106,7 @@
 
             /* SPI side */
             mipi-max-frequency = <8000000>;   /* 8 MHz is a safe starting point */
-            mipi-mode = "MIPI_DBI_MODE_SPI_4WIRE";
+            mipi-mode = <MIPI_DBI_MODE_SPI_4WIRE>;
 
             /* Panel geometry */
             width  = <256>;
@@ -127,23 +139,6 @@
                     <NRF_PSEL(SPIM_MOSI, 0, 10)>;
             low-power-enable;
         };
-    };
-};
-
-/* Enable SPI0 and hook CS on P0.17 */
-&spi0 {
-    status = "okay";
-    cs-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
-
-    pinctrl-0 = <&spi0_default>;
-    pinctrl-1 = <&spi0_sleep>;
-    pinctrl-names = "default", "sleep";
-
-    /* THIS is what mipi_dbi0.spi-dev must reference */
-    ssd1322_spi: spi-device@0 {
-        compatible = "zephyr,spi-device";
-        reg = <0>;
-        spi-max-frequency = <8000000>;
     };
 };
 

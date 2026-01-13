@@ -73,7 +73,7 @@
     };
 
         /* MIPI-DBI bus (top-level node in Zephyr 4.1 style) */
-    mipi_dbi0: mipi-dbi@0 {
+    mipi_dbi0: mipi-dbi0 {
         compatible = "zephyr,mipi-dbi-spi";
         status = "okay";
 

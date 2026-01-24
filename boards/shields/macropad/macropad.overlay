@@ -73,12 +73,12 @@
     };
 
         /* MIPI-DBI bus (top-level node in Zephyr 4.1 style) */
-    mipi_dbi0: mipi-dbi0 {
+    mipi_dbi0: mipi-dbi@0 {
         compatible = "zephyr,mipi-dbi-spi";
         status = "okay";
 
         /* THIS is what Zephyr 4.1 requires */
-        spi-dev = <&spi0>;
+        spi-dev = <&ssd1322_spi>;
 
         dc-gpios    = <&gpio0 8 GPIO_ACTIVE_HIGH>;
         reset-gpios = <&gpio0 20 GPIO_ACTIVE_LOW>;
@@ -94,7 +94,6 @@
             width  = <256>;
             height = <64>;
 
-            /* Zephyr 4.1: string enum (NOT <...>) */
             mipi-mode = "MIPI_DBI_MODE_SPI_4WIRE";
             mipi-max-frequency = <8000000>;
 
@@ -113,6 +112,13 @@
     pinctrl-0 = <&spi0_default>;
     pinctrl-1 = <&spi0_sleep>;
     pinctrl-names = "default", "sleep";
+
+    ssd1322_spi: ssd1322-spi-dev@0 {
+        compatible = "zephyr,spi-device";
+        reg = <0>;                    /* matches CS index 0 */
+        spi-max-frequency = <8000000>;
+        status = "okay";
+    };
 };
 
 /* Your pinctrl override (SCK=P1.13, MOSI=P0.10, no MISO) */

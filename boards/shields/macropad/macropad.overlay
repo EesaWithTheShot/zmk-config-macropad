@@ -142,3 +142,7 @@
 &i2c0 {
     status = "disabled";
 };
+
+&oled {
+    status = "disabled";
+};

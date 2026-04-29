@@ -9,7 +9,7 @@
     chosen {
         zmk,kscan = &kscan0;
         zmk,matrix-transform = &default_transform;
-        zephyr,display = &oled;
+        /* zephyr,display = &oled; */
     };
 
     /* --- Matrix scan: 6 rows x 4 columns --- */
@@ -140,9 +140,5 @@
 };
 
 &i2c0 {
-    status = "disabled";
-};
-
-&oled {
     status = "disabled";
 };

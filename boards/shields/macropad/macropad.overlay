@@ -101,10 +101,6 @@
             mux-ratio = <63>;
             segments-per-pixel = <1>;
 
-            oscillator-freq   = <0x91>;
-            precharge-voltage = <0x1F>;
-            vcomh-voltage     = <0x07>;
-            phase-length      = <0xE2>;
         };
     };
 };

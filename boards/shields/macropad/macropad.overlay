@@ -101,7 +101,14 @@
             segments-per-pixel = <1>;
             remap-nibble;
             remap-com-dual;
-            remap-com-odd-even-split;
+            
+            /* Tuned for TEYLETEN 3.12" — adjust if image still wrong */
+            oscillator-freq = <0x91>;
+            phase-length = <0xE2>;
+            precharge-voltage = <0x1F>;
+            precharge-period = <0x08>;
+            vcomh-voltage = <0x07>;
+            grayscale-enhancement;
 
         };
     };

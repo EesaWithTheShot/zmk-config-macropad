@@ -1,0 +1,58 @@
+# Copyright (c) 2024 Lukasz Hawrylko
+# Copyright (c) 2025 MASSDRIVER EI
+# SPDX-License-Identifier: Apache-2.0
+
+description: Solomon SSD1322 display controller (extended)
+
+compatible: "solomon,ssd1322"
+
+include: [mipi-dbi-spi-device.yaml, display-controller.yaml]
+
+properties:
+  column-offset:
+    type: int
+    required: true
+  row-offset:
+    type: int
+    default: 0
+  start-line:
+    type: int
+    default: 0
+  mux-ratio:
+    type: int
+    default: 63
+  segments-per-pixel:
+    type: int
+    default: 1
+    enum: [1, 2]
+  remap-row-first:
+    type: boolean
+  remap-columns:
+    type: boolean
+  remap-rows:
+    type: boolean
+  remap-nibble:
+    type: boolean
+  remap-com-odd-even-split:
+    type: boolean
+  remap-com-dual:
+    type: boolean
+  grayscale-enhancement:
+    type: boolean
+  inversion-on:
+    type: boolean
+  oscillator-freq:
+    type: int
+    default: 0x91
+  precharge-voltage:
+    type: int
+    default: 0x1F
+  vcomh-voltage:
+    type: int
+    default: 0x07
+  phase-length:
+    type: int
+    default: 0xE2
+  precharge-period:
+    type: int
+    default: 0x08

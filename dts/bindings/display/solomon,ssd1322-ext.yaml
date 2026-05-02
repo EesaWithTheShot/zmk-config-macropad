@@ -4,7 +4,7 @@
 
 description: Solomon SSD1322 display controller (extended)
 
-compatible: "solomon,ssd1322"
+compatible: "solomon,ssd1322-ext"
 
 include: [mipi-dbi-spi-device.yaml, display-controller.yaml]
 

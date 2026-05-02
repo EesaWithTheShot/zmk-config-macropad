@@ -87,7 +87,7 @@
         #size-cells = <0>;
 
         oled: ssd1322@0 {
-            compatible = "solomon,ssd1322";
+            compatible = "solomon,ssd1322-ext";
             reg = <0>;
 
             width  = <256>;
@@ -101,7 +101,7 @@
             segments-per-pixel = <1>;
             remap-nibble;
             remap-com-dual;
-            
+
             /* Tuned for TEYLETEN 3.12" — adjust if image still wrong */
             oscillator-freq = <0x91>;
             phase-length = <0xE2>;

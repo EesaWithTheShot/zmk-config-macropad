@@ -6,7 +6,7 @@
  */
 
 #include "zephyr/sys/util.h"
-#define DT_DRV_COMPAT solomon_ssd1322
+#define DT_DRV_COMPAT solomon_ssd1322_ext
 
 #include <zephyr/logging/log.h>
 LOG_MODULE_REGISTER(ssd1322, CONFIG_DISPLAY_LOG_LEVEL);
@@ -526,4 +526,4 @@ static DEVICE_API(display, ssd1322_driver_api) = {
 	DEVICE_DT_DEFINE(node_id, ssd1322_init, NULL, &data##node_id, &config##node_id,            \
 			 POST_KERNEL, CONFIG_DISPLAY_INIT_PRIORITY, &ssd1322_driver_api);
 
-DT_FOREACH_STATUS_OKAY(solomon_ssd1322, SSD1322_DEFINE)
+DT_FOREACH_STATUS_OKAY(solomon_ssd1322_ext, SSD1322_DEFINE)

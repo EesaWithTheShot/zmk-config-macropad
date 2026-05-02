@@ -99,7 +99,6 @@
             column-offset = <28>;
             mux-ratio = <63>;
             segments-per-pixel = <1>;
-            inversion-on;
             remap-nibble;
             remap-rows;
             remap-com-dual;

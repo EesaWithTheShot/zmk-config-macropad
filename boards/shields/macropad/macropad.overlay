@@ -97,11 +97,11 @@
             mipi-max-frequency = <8000000>;
 
             column-offset = <28>;
-            mux-ratio = <64>;
+            mux-ratio = <63>;
             segments-per-pixel = <1>;
             remap-nibble;
-            remap-com-odd-even-split;
             remap-com-dual;
+            remap-com-odd-even-split;
 
         };
     };

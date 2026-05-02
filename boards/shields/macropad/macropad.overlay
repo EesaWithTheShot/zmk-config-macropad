@@ -72,8 +72,7 @@
         triggers-per-rotation = <24>;
     };
 
-        /* MIPI-DBI bus (top-level node in Zephyr 4.1 style) */
-    /*
+    /* MIPI-DBI bus (top-level node in Zephyr 4.1 style) */
     mipi_dbi0: mipi-dbi {
         compatible = "zephyr,mipi-dbi-spi";
         status = "okay";
@@ -103,11 +102,10 @@
 
         };
     };
-    */
+    
 };
 
 /* SPI0 still needs to be enabled + have CS */
-/*
 &spi0 {
     status = "okay";
     cs-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
@@ -117,7 +115,7 @@
     pinctrl-names = "default", "sleep";
 
 };
-*/
+
 
 /* Your pinctrl override (SCK=P1.13, MOSI=P0.10, no MISO) */
 &pinctrl {

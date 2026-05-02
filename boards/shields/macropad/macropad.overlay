@@ -9,7 +9,7 @@
     chosen {
         zmk,kscan = &kscan0;
         zmk,matrix-transform = &default_transform;
-        zephyr,display = &oled;
+        /* zephyr,display = &oled; */
     };
 
     /* --- Matrix scan: 6 rows x 4 columns --- */
@@ -73,11 +73,11 @@
     };
 
         /* MIPI-DBI bus (top-level node in Zephyr 4.1 style) */
+    /*
     mipi_dbi0: mipi-dbi {
         compatible = "zephyr,mipi-dbi-spi";
         status = "okay";
 
-        /* THIS is what Zephyr 4.1 requires */
         spi-dev = <&spi0>;
 
         dc-gpios    = <&gpio0 8 GPIO_ACTIVE_HIGH>;
@@ -103,9 +103,11 @@
 
         };
     };
+    */
 };
 
 /* SPI0 still needs to be enabled + have CS */
+/*
 &spi0 {
     status = "okay";
     cs-gpios = <&gpio0 17 GPIO_ACTIVE_LOW>;
@@ -115,6 +117,7 @@
     pinctrl-names = "default", "sleep";
 
 };
+*/
 
 /* Your pinctrl override (SCK=P1.13, MOSI=P0.10, no MISO) */
 &pinctrl {

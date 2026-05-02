@@ -18,7 +18,15 @@ LOG_MODULE_REGISTER(ssd1322, CONFIG_DISPLAY_LOG_LEVEL);
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/drivers/mipi_dbi.h>
 #include <zephyr/kernel.h>
-
+/* Compatibility shim: PIXEL_FORMAT_L_8 was added to Zephyr's
+ * display.h enum after 4.1. Define it locally so the driver compiles.
+ * The value matches BIT(6) following the enum's bitmask convention.
+ * This is only used as a tag passed to mipi_dbi_write_display, which
+ * (per the comments below) ignores the actual format value.
+ */
+#ifndef PIXEL_FORMAT_L_8
+#define PIXEL_FORMAT_L_8 (1U << 6)
+#endif
 #define SSD1322_SET_COLUMN_ADDR      0x15
 #define SSD1322_ENABLE_RAM_WRITE     0x5C
 #define SSD1322_SET_ROW_ADDR         0x75

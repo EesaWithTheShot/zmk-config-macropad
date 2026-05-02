@@ -2,7 +2,6 @@ config SSD1322_PATCHED
     bool "Use patched SSD1322 driver (with grayscale + inversion)"
     default y
     depends on DISPLAY && MIPI_DBI
-    select MIPI_DBI
 
 config SSD1322_DEFAULT_GRAYSCALE
     bool "Default SSD1322 to L_8 grayscale pixel format"

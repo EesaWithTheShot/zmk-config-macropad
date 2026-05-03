@@ -101,7 +101,7 @@
             segments-per-pixel = <1>;
             remap-nibble;
             remap-com-dual;
-            inversion-on;
+
             /* Tuned for TEYLETEN 3.12" — adjust if image still wrong */
             oscillator-freq = <0x91>;
             phase-length = <0xE2>;

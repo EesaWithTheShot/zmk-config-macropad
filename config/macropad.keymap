@@ -5,12 +5,11 @@
 
 / {
     behaviors {
-        ht_off: hold_tap_soft_off {
-            compatible = "zmk,behavior-hold-tap";
-            #binding-cells = <2>;
-            tapping-term-ms = <1000>;
-            flavor = "hold-preferred";
-            bindings = <&kp>, <&soft_off>;
+        pwr: pwr_tap_dance {
+            compatible = "zmk,behavior-tap-dance";
+            #binding-cells = <0>;
+            tapping-term-ms = <500>;
+            bindings = <&none>, <&soft_off>;
         };
     };
 
@@ -21,7 +20,7 @@
         default_layer {
             bindings = <
                 // Row 0: soft-off (hold) | USB/BLE toggle | switch to macro layer | encoder N3
-                &ht_off F14 0    &out OUT_TOG     &tog 1            &kp N3
+                &pwr             &out OUT_TOG     &tog 1            &kp N3
 
                 // Row 1
                 &kp ESC          &kp KP_SLASH     &kp KP_ASTERISK   &kp BACKSPACE
@@ -46,10 +45,10 @@
         macro_layer {
             bindings = <
                 // Row 0: soft-off (hold) | USB/BLE toggle | back to numpad | encoder N3
-                &ht_off F13 0    &out OUT_TOG     &tog 1            &kp N3
+                &pwr             &out OUT_TOG     &tog 1            &kp N3
 
                 // Row 1: F15–F18
-                &kp F15          &kp F16          &kp F17           &kp F18
+                &bt BT_CLR_ALL   &kp F16          &kp F17           &kp F18
 
                 // Row 2: F19–F22
                 &kp F19          &kp F20          &kp F21           &kp F22

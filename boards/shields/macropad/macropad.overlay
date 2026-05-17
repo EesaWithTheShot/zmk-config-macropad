@@ -101,6 +101,7 @@
             segments-per-pixel = <1>;
             remap-nibble;
             remap-com-dual;
+            remap-columns;
 
             /* Tuned for TEYLETEN 3.12" — adjust if image still wrong */
             oscillator-freq = <0x91>;

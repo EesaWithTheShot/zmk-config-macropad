@@ -9,7 +9,7 @@
             compatible = "zmk,behavior-hold-tap";
             #binding-cells = <2>;
             tapping-term-ms = <1000>;
-            flavor = "tap-preferred";
+            flavor = "hold-preferred";
             bindings = <&kp>, <&soft_off>;
         };
     };
@@ -46,7 +46,7 @@
         macro_layer {
             bindings = <
                 // Row 0: soft-off (hold) | USB/BLE toggle | back to numpad | encoder N3
-                &ht_off F13 0    &out OUT_TOG     &tog 0            &kp N3
+                &ht_off F13 0    &out OUT_TOG     &tog 1            &kp N3
 
                 // Row 1: F15–F18
                 &kp F15          &kp F16          &kp F17           &kp F18
